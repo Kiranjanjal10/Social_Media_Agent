@@ -333,20 +333,30 @@ Write naturally and provide real value."""
 
 
 # -------------------- COMPATIBILITY WRAPPER --------------------
+# class GoogleAIIntegration:
+#     """Backward-compatible wrapper"""
+    
+#     def __init__(self):
+#         self.agent = BlogWriterAgent()
+    
+#     def generate_blog_content(self, topic: str, platform: str, word_count: int = None) -> Dict:
+#         """Generate blog content (compatible with old API)
+        
+#         Args:
+#             topic: Blog topic
+#             platform: Target platform
+#             word_count: Desired word count (None = platform default)
+#         """
+#         return self.agent.write_blog(topic, platform, word_count)
+
 class GoogleAIIntegration:
     """Backward-compatible wrapper"""
-    
+
     def __init__(self):
         self.agent = BlogWriterAgent()
-    
+        self.api_key = self.agent.api_key
+
     def generate_blog_content(self, topic: str, platform: str, word_count: int = None) -> Dict:
-        """Generate blog content (compatible with old API)
-        
-        Args:
-            topic: Blog topic
-            platform: Target platform
-            word_count: Desired word count (None = platform default)
-        """
         return self.agent.write_blog(topic, platform, word_count)
 
 
